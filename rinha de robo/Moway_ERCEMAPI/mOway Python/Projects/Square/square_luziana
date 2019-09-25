@@ -1,0 +1,48 @@
+from time import sleep
+sys.path.append("../lib/")
+from moway_lib import *
+
+if __name__ == '__main__':
+        atexit.register(exit_mow)
+        
+channel = 7
+moway.usbinit_moway()
+ret = moway.init_moway(channel)
+if ret == 0:
+        print 'Moway RFUSB Connected'
+else:   
+        print 'Moway RFUSB not connected. Exit'
+        exit(-1)
+
+
+#preto ta ok(as vezes trava, por conta do braco), problema quando branco
+moway.set_rotation_axis(WHEEL)
+while True:
+        line_r = moway.get_line_right()
+        line_f = moway.get_line_left()
+        fel = line_r - line_f
+        mik = line_r + line_f
+
+        print(line_f,line_r)
+        print("fel, mik")
+        print(fel, mik)
+        #if fel > -10 and fel < 10:
+        if mik >= 180:
+                moway.set_time(20)
+                moway.set_distance(10)
+                moway.command_moway(CMD_GO,50)
+        else:
+                #ta faltando quando eles são iguais            
+                if line_r > line_f:
+                        moway.command_moway(CMD_ROTATERIGHT,30)
+                        moway.command_moway(CMD_STOP,25)
+                elif line_f > line_r:
+                        moway.command_moway(CMD_ROTATELEFT,30)
+                        moway.command_moway(CMD_STOP,25)
+                elif line_r == line_f:
+                    moway.set_time(20)
+                    moway.set_distance(10)
+                    moway.command_moway(CMD_GO,50)
+                                
+                                
+                                

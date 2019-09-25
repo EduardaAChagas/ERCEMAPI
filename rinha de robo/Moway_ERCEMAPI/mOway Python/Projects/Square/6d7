@@ -1,0 +1,9 @@
+import sys, atexit , msvcrt
+from time import sleep
+sys.path.append(“../lib/”)
+
+from moway_lib import *
+
+if __name__ == ‘__main__´:
+atexit.register(exit_mow)
+channel = 7
