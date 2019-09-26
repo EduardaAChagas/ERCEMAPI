@@ -6,7 +6,7 @@ from moway_lib import *
 if __name__ == '__main__':
     atexit.register(exit_mow)
 
-channel = 6
+channel = 5
 moway.usbinit_moway()
 ret = moway.init_moway(channel)
 print(ret)
@@ -18,11 +18,18 @@ else:
 
 #dudz
 
-moway.command_moway(CMD_BACK_SIMPLE, 0)
-while i<=5:
-    i=i+0.01
-
-    if i==5:
-        moway.command_moway(CMD_STOP,0)
+while True:
+    if msvcrt.kbhit():
+        ch = msvcrt.getch()
+        if ch=='w':
+            moway.command_moway(CMD_GO_SIMPLE,0)
+        if ch=='z':
+            moway.command_moway(CMD_BACK_SIMPLE,0)
+        if ch=='a':
+            moway.command_moway(CMD_LEFT_SIMPLE,0)
+        if ch=='d':
+            moway.command_moway(CMD_RIGHT_SIMPLE,0)
+        if ch=='s':
+            moway.command_moway(CMD_STOP,0)
     
     

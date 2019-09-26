@@ -6,7 +6,7 @@ from moway_lib import *
 if __name__ == '__main__':
         atexit.register(exit_mow)
         
-channel = 7
+channel = 5
 moway.usbinit_moway()
 ret = moway.init_moway(channel)
 print(ret)
