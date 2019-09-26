@@ -19,4 +19,10 @@ else:
 #dudz e loigiz
 
 while True:
-    print(moway.get_obs_center_left())
+    #print(moway.get_obs_center_left())
+    if moway.get_obs_center_left()>0:
+        moway.command_moway(CMD_FRONTLEDON)
+        moway.command_moway(CMD_REDLEDOFF)
+    else:
+        moway.command_moway(CMD_FRONTLEDOFF)
+        moway.command_moway(CMD_REDLEDON)
